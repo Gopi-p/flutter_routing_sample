@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route_example/Folders/folders_controller.dart';
-import 'package:auto_route_example/Router/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mini_ui/mini_ui.dart';

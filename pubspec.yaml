@@ -1,5 +1,5 @@
 name: auto_route_example
-description: A new Flutter project to demonstrate the routing with auto_route package.
+description: A sample app for auto route
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
