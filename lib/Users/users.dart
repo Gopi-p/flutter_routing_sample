@@ -1,4 +1,4 @@
-import 'package:auto_route_example/Myapp/myapp_controller.dart';
+import 'package:auto_route_example/my_app/myapp_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mini_ui/mini_ui.dart';

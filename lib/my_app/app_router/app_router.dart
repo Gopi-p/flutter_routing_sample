@@ -68,3 +68,6 @@ part 'app_router.gr.dart';
 )
 // extend the generated private router
 class AppRouter extends _$AppRouter {}
+
+
+//Route Generator Command : flutter packages pub run build_runner build
