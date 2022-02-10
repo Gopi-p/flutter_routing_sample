@@ -38,8 +38,7 @@ class _$AppRouter extends RootStackRouter {
       return MaterialPageX<dynamic>(routeData: routeData, child: FileManager());
     },
     ProfileRoute.name: (routeData) {
-      return MaterialPageX<dynamic>(
-          routeData: routeData, child: const Profile());
+      return MaterialPageX<dynamic>(routeData: routeData, child: Profile());
     },
     RockSongsRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
