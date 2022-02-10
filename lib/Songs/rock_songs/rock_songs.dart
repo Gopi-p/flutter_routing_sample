@@ -8,6 +8,7 @@ class RockSongs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("ROCKS SONGS BUILD");
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

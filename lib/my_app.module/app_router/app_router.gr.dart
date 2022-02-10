@@ -32,11 +32,10 @@ class _$AppRouter extends RootStackRouter {
           routeData: routeData, child: const Movies());
     },
     GamesRoute.name: (routeData) {
-      return MaterialPageX<dynamic>(routeData: routeData, child: const Games());
+      return MaterialPageX<dynamic>(routeData: routeData, child: Games());
     },
     FileManagerRoute.name: (routeData) {
-      return MaterialPageX<dynamic>(
-          routeData: routeData, child: const FileManager());
+      return MaterialPageX<dynamic>(routeData: routeData, child: FileManager());
     },
     ProfileRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
@@ -53,6 +52,18 @@ class _$AppRouter extends RootStackRouter {
     HiphopSongsRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const HiphopSongs());
+    },
+    PopularMoviesRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const PopularMovies());
+    },
+    TopRatedMoviesRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const TopRatedMovies());
+    },
+    UpcomingMoviesRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const UpcomingMovies());
     }
   };
 
@@ -69,7 +80,21 @@ class _$AppRouter extends RootStackRouter {
           RouteConfig(SongsRoute.name,
               path: 'songs', parent: DashboardRoute.name),
           RouteConfig(MoviesRoute.name,
-              path: 'movies', parent: DashboardRoute.name),
+              path: 'movies',
+              parent: DashboardRoute.name,
+              children: [
+                RouteConfig('#redirect',
+                    path: '',
+                    parent: MoviesRoute.name,
+                    redirectTo: 'popular-movies',
+                    fullMatch: true),
+                RouteConfig(PopularMoviesRoute.name,
+                    path: 'popular-movies', parent: MoviesRoute.name),
+                RouteConfig(TopRatedMoviesRoute.name,
+                    path: 'top-rated-movies', parent: MoviesRoute.name),
+                RouteConfig(UpcomingMoviesRoute.name,
+                    path: 'upcoming-movies', parent: MoviesRoute.name)
+              ]),
           RouteConfig(GamesRoute.name,
               path: 'games', parent: DashboardRoute.name),
           RouteConfig(FileManagerRoute.name,
@@ -114,7 +139,8 @@ class SongsRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [Movies]
 class MoviesRoute extends PageRouteInfo<void> {
-  const MoviesRoute() : super(MoviesRoute.name, path: 'movies');
+  const MoviesRoute({List<PageRouteInfo>? children})
+      : super(MoviesRoute.name, path: 'movies', initialChildren: children);
 
   static const String name = 'MoviesRoute';
 }
@@ -165,4 +191,31 @@ class HiphopSongsRoute extends PageRouteInfo<void> {
   const HiphopSongsRoute() : super(HiphopSongsRoute.name, path: 'melody-songs');
 
   static const String name = 'HiphopSongsRoute';
+}
+
+/// generated route for
+/// [PopularMovies]
+class PopularMoviesRoute extends PageRouteInfo<void> {
+  const PopularMoviesRoute()
+      : super(PopularMoviesRoute.name, path: 'popular-movies');
+
+  static const String name = 'PopularMoviesRoute';
+}
+
+/// generated route for
+/// [TopRatedMovies]
+class TopRatedMoviesRoute extends PageRouteInfo<void> {
+  const TopRatedMoviesRoute()
+      : super(TopRatedMoviesRoute.name, path: 'top-rated-movies');
+
+  static const String name = 'TopRatedMoviesRoute';
+}
+
+/// generated route for
+/// [UpcomingMovies]
+class UpcomingMoviesRoute extends PageRouteInfo<void> {
+  const UpcomingMoviesRoute()
+      : super(UpcomingMoviesRoute.name, path: 'upcoming-movies');
+
+  static const String name = 'UpcomingMoviesRoute';
 }
