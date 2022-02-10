@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_routing_sample/shared.module/constants/theme.dart';
 
-class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
+class UpcomingMovies extends StatelessWidget {
+  const UpcomingMovies({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print("PROFILE BUILD");
+    print("MOVIE BUILD { Upcoming movies }");
     return Center(
       child: Text(
-        'Profile',
+        'Upcoming Movies',
         style: headingText1,
       ),
     );

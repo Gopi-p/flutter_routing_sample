@@ -8,6 +8,7 @@ class MelodySongs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("MELODY SONGS BUILD");
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

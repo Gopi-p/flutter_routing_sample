@@ -8,6 +8,7 @@ class HiphopSongs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("HIP HOP SONGS BUILD");
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

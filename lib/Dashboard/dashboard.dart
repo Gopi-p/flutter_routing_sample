@@ -12,6 +12,7 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("DASHBOARD BUILD { parent }");
     return Scaffold(
       backgroundColor: backgroundColor,
       body: Row(
@@ -46,6 +47,7 @@ class SideMenu extends StatelessWidget {
   final DashboardController _dashboardController = Get.find();
   @override
   Widget build(BuildContext context) {
+    print("DASHBOARD BUILD { sidemenu }");
     return Padding(
       padding: paddingAll(18),
       child: Container(

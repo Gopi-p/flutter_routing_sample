@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_routing_sample/shared.module/constants/theme.dart';
 
-class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
+class PopularMovies extends StatelessWidget {
+  const PopularMovies({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print("PROFILE BUILD");
+    print("MOVIE BUILD { PopularMovies }");
     return Center(
       child: Text(
-        'Profile',
+        'Popular Movies',
         style: headingText1,
       ),
     );

@@ -2,13 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_routing_sample/my_app.module/app_router/app_router.dart';
 import 'package:flutter_routing_sample/shared.module/constants/theme.dart';
-import 'package:get/get.dart';
 
 class Songs extends StatelessWidget {
   const Songs({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print("SONGS BUILD { parent }");
     return Wrap(
       alignment: WrapAlignment.center,
       runAlignment: WrapAlignment.center,
