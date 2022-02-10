@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(auto_route_example LANGUAGES CXX)
+project(flutter_routing_sample LANGUAGES CXX)
 
-set(BINARY_NAME "auto_route_example")
+set(BINARY_NAME "flutter_routing_sample")
 
 cmake_policy(SET CMP0063 NEW)
 
