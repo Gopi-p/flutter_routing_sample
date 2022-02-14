@@ -41,8 +41,3 @@ BoxShadow boxShadow({
     spreadRadius: 0,
   );
 }
-
-//Utils
-EdgeInsets paddingAll(double padding) {
-  return EdgeInsets.all(padding);
-}

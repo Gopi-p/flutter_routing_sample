@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_routing_sample/my_app.module/app_router/app_router.dart';
 import 'package:flutter_routing_sample/shared.module/constants/theme.dart';
-import 'package:flutter_routing_sample/shared.module/functions/theme.dart';
 
 class Movies extends StatelessWidget {
   const Movies({Key? key}) : super(key: key);
@@ -10,6 +9,7 @@ class Movies extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("MOVIES BUILD { parent }");
+
     return AutoTabsRouter(
       routes: const [
         PopularMoviesRoute(),
@@ -19,11 +19,12 @@ class Movies extends StatelessWidget {
       builder: (context, child, animation) {
         final tabsRouter = AutoTabsRouter.of(context);
         return DefaultTabController(
+          initialIndex: tabsRouter.activeIndex,
           length: 3,
           child: Column(
             children: [
               Container(
-                padding: paddingAll(6),
+                padding: const EdgeInsets.all(6),
                 decoration: const BoxDecoration(
                   color: secondaryLightColor,
                   borderRadius: BorderRadius.vertical(

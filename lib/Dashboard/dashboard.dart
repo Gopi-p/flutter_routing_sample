@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_routing_sample/my_app.module/app_router/app_router.dart';
+import 'package:flutter_routing_sample/my_app.module/my_app_controller.dart';
+import 'package:flutter_routing_sample/shared.module/constants/assets_names.dart';
+import 'package:flutter_routing_sample/shared.module/widgets/primary_button.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_routing_sample/dashboard/dashboard_controller.dart';
 import 'package:flutter_routing_sample/shared.module/constants/theme.dart';
@@ -27,7 +30,7 @@ class Dashboard extends StatelessWidget {
                     margin:
                         const EdgeInsets.only(top: 18, right: 18, bottom: 18),
                     decoration: BoxDecoration(
-                      color: secondaryDarkColor,
+                      // color: secondaryDarkColor,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const AutoRouter(),
@@ -45,11 +48,12 @@ class Dashboard extends StatelessWidget {
 class SideMenu extends StatelessWidget {
   SideMenu({Key? key}) : super(key: key);
   final DashboardController _dashboardController = Get.find();
+  final InitController _initController = Get.find();
   @override
   Widget build(BuildContext context) {
     print("DASHBOARD BUILD { sidemenu }");
     return Padding(
-      padding: paddingAll(18),
+      padding: const EdgeInsets.all(18),
       child: Container(
         width: 250,
         decoration: BoxDecoration(
@@ -57,7 +61,7 @@ class SideMenu extends StatelessWidget {
           color: secondaryDarkColor,
         ),
         child: Padding(
-          padding: paddingAll(12),
+          padding: const EdgeInsets.all(12),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -78,6 +82,14 @@ class SideMenu extends StatelessWidget {
                   },
                 ),
               ),
+              PrimaryButton(
+                title: "Logout",
+                iconPath: leftCircledArrowIcon,
+                onTap: () {
+                  _initController.isUserLoggedIn.value = false;
+                  context.router.replaceAll([LoginRoute()]);
+                },
+              )
             ],
           ),
         ),
@@ -154,14 +166,15 @@ class SideMenuButton extends StatelessWidget {
           router.push(const MoviesRoute());
           break;
         case 3:
-          router.push(const GamesRoute());
+          router.push(GamesRoute());
           break;
         case 4:
-          router.push(const FileManagerRoute());
+          router.push(FileManagerRoute());
           break;
         case 5:
-          router.push(const ProfileRoute());
+          router.push(ProfileRoute());
           break;
+
         default:
       }
     }
