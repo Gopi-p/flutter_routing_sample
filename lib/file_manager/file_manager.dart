@@ -24,13 +24,30 @@ class FileManager extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        PrimaryButton(
-          title: "Check Melody Songs",
-          iconPath: musicIcon,
-          onTap: () {
-            context.router.push(const MelodySongsRoute());
-            _dashboardController.activeSideMenuIndex.value = 1;
-          },
+        Wrap(
+          alignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          runAlignment: WrapAlignment.center,
+          spacing: 20,
+          runSpacing: 20,
+          children: [
+            PrimaryButton(
+              title: "Listen Melody Songs",
+              iconPath: musicIcon,
+              onTap: () {
+                context.router.push(const MelodySongsRoute());
+                _dashboardController.activeSideMenuIndex.value = 1;
+              },
+            ),
+            PrimaryButton(
+              title: "Check Upcoming Movies",
+              iconPath: movieIcon,
+              onTap: () {
+                context.router.pushNamed('movies/upcoming-movies');
+                _dashboardController.activeSideMenuIndex.value = 2;
+              },
+            ),
+          ],
         ),
       ],
     );

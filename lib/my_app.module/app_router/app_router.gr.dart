@@ -13,13 +13,32 @@
 part of 'app_router.dart';
 
 class _$AppRouter extends RootStackRouter {
-  _$AppRouter([GlobalKey<NavigatorState>? navigatorKey]) : super(navigatorKey);
+  _$AppRouter(
+      {GlobalKey<NavigatorState>? navigatorKey,
+      required this.loginRouteGuard,
+      required this.authGuard})
+      : super(navigatorKey);
+
+  final LoginRouteGuard loginRouteGuard;
+
+  final AuthGuard authGuard;
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    LoginRoute.name: (routeData) {
+      final args = routeData.argsAs<LoginRouteArgs>(
+          orElse: () => const LoginRouteArgs());
+      return MaterialPageX<bool>(
+          routeData: routeData,
+          child: Login(key: args.key, onLogin: args.onLogin));
+    },
     DashboardRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const Dashboard());
+    },
+    UnknownRouteRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const UnknownRoute());
     },
     HomeRoute.name: (routeData) {
       return MaterialPageX<dynamic>(routeData: routeData, child: const Home());
@@ -32,13 +51,31 @@ class _$AppRouter extends RootStackRouter {
           routeData: routeData, child: const Movies());
     },
     GamesRoute.name: (routeData) {
-      return MaterialPageX<dynamic>(routeData: routeData, child: Games());
+      final args = routeData.argsAs<GamesRouteArgs>(
+          orElse: () => const GamesRouteArgs());
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: Games(key: args.key));
     },
     FileManagerRoute.name: (routeData) {
-      return MaterialPageX<dynamic>(routeData: routeData, child: FileManager());
+      final args = routeData.argsAs<FileManagerRouteArgs>(
+          orElse: () => const FileManagerRouteArgs());
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: FileManager(key: args.key));
     },
     ProfileRoute.name: (routeData) {
-      return MaterialPageX<dynamic>(routeData: routeData, child: Profile());
+      final args = routeData.argsAs<ProfileRouteArgs>(
+          orElse: () => const ProfileRouteArgs());
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: Profile(key: args.key));
+    },
+    ProfileDetailsRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<ProfileDetailsRouteArgs>(
+          orElse: () =>
+              ProfileDetailsRouteArgs(userId: pathParams.getString('userId')));
+      return MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: ProfileDetails(key: args.key, userId: args.userId));
     },
     RockSongsRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
@@ -68,7 +105,10 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   List<RouteConfig> get routes => [
-        RouteConfig(DashboardRoute.name, path: '/', children: [
+        RouteConfig(LoginRoute.name, path: '/login', guards: [loginRouteGuard]),
+        RouteConfig(DashboardRoute.name, path: '/', guards: [
+          authGuard
+        ], children: [
           RouteConfig('#redirect',
               path: '',
               parent: DashboardRoute.name,
@@ -100,14 +140,40 @@ class _$AppRouter extends RootStackRouter {
               path: 'file-manager', parent: DashboardRoute.name),
           RouteConfig(ProfileRoute.name,
               path: 'profile', parent: DashboardRoute.name),
+          RouteConfig(ProfileDetailsRoute.name,
+              path: 'user-details/:userId', parent: DashboardRoute.name),
           RouteConfig(RockSongsRoute.name,
               path: 'rock-songs', parent: DashboardRoute.name),
           RouteConfig(MelodySongsRoute.name,
               path: 'hiphop-songs', parent: DashboardRoute.name),
           RouteConfig(HiphopSongsRoute.name,
               path: 'melody-songs', parent: DashboardRoute.name)
-        ])
+        ]),
+        RouteConfig(UnknownRouteRoute.name, path: '*')
       ];
+}
+
+/// generated route for
+/// [Login]
+class LoginRoute extends PageRouteInfo<LoginRouteArgs> {
+  LoginRoute({Key? key, dynamic Function(bool)? onLogin})
+      : super(LoginRoute.name,
+            path: '/login', args: LoginRouteArgs(key: key, onLogin: onLogin));
+
+  static const String name = 'LoginRoute';
+}
+
+class LoginRouteArgs {
+  const LoginRouteArgs({this.key, this.onLogin});
+
+  final Key? key;
+
+  final dynamic Function(bool)? onLogin;
+
+  @override
+  String toString() {
+    return 'LoginRouteArgs{key: $key, onLogin: $onLogin}';
+  }
 }
 
 /// generated route for
@@ -117,6 +183,14 @@ class DashboardRoute extends PageRouteInfo<void> {
       : super(DashboardRoute.name, path: '/', initialChildren: children);
 
   static const String name = 'DashboardRoute';
+}
+
+/// generated route for
+/// [UnknownRoute]
+class UnknownRouteRoute extends PageRouteInfo<void> {
+  const UnknownRouteRoute() : super(UnknownRouteRoute.name, path: '*');
+
+  static const String name = 'UnknownRouteRoute';
 }
 
 /// generated route for
@@ -146,26 +220,89 @@ class MoviesRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [Games]
-class GamesRoute extends PageRouteInfo<void> {
-  const GamesRoute() : super(GamesRoute.name, path: 'games');
+class GamesRoute extends PageRouteInfo<GamesRouteArgs> {
+  GamesRoute({Key? key})
+      : super(GamesRoute.name, path: 'games', args: GamesRouteArgs(key: key));
 
   static const String name = 'GamesRoute';
 }
 
+class GamesRouteArgs {
+  const GamesRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'GamesRouteArgs{key: $key}';
+  }
+}
+
 /// generated route for
 /// [FileManager]
-class FileManagerRoute extends PageRouteInfo<void> {
-  const FileManagerRoute() : super(FileManagerRoute.name, path: 'file-manager');
+class FileManagerRoute extends PageRouteInfo<FileManagerRouteArgs> {
+  FileManagerRoute({Key? key})
+      : super(FileManagerRoute.name,
+            path: 'file-manager', args: FileManagerRouteArgs(key: key));
 
   static const String name = 'FileManagerRoute';
 }
 
+class FileManagerRouteArgs {
+  const FileManagerRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'FileManagerRouteArgs{key: $key}';
+  }
+}
+
 /// generated route for
 /// [Profile]
-class ProfileRoute extends PageRouteInfo<void> {
-  const ProfileRoute() : super(ProfileRoute.name, path: 'profile');
+class ProfileRoute extends PageRouteInfo<ProfileRouteArgs> {
+  ProfileRoute({Key? key})
+      : super(ProfileRoute.name,
+            path: 'profile', args: ProfileRouteArgs(key: key));
 
   static const String name = 'ProfileRoute';
+}
+
+class ProfileRouteArgs {
+  const ProfileRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'ProfileRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [ProfileDetails]
+class ProfileDetailsRoute extends PageRouteInfo<ProfileDetailsRouteArgs> {
+  ProfileDetailsRoute({Key? key, required String userId})
+      : super(ProfileDetailsRoute.name,
+            path: 'user-details/:userId',
+            args: ProfileDetailsRouteArgs(key: key, userId: userId),
+            rawPathParams: {'userId': userId});
+
+  static const String name = 'ProfileDetailsRoute';
+}
+
+class ProfileDetailsRouteArgs {
+  const ProfileDetailsRouteArgs({this.key, required this.userId});
+
+  final Key? key;
+
+  final String userId;
+
+  @override
+  String toString() {
+    return 'ProfileDetailsRouteArgs{key: $key, userId: $userId}';
+  }
 }
 
 /// generated route for

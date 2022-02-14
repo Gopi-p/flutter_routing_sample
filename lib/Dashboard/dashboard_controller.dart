@@ -1,5 +1,5 @@
 import 'package:flutter_routing_sample/shared.module/constants/assets_names.dart';
-import 'package:flutter_routing_sample/shared.module/models/dashboard.dart';
+import 'package:flutter_routing_sample/shared.module/schemas/dashboard.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends GetxController {

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class MyAppBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(InitController());
+    Get.lazyPut<InitController>(() => InitController());
     Get.lazyPut<DashboardController>(() => DashboardController());
     Get.lazyPut<ProfileController>(() => ProfileController());
   }
