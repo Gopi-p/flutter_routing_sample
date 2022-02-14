@@ -100,6 +100,12 @@ class _$AppRouter extends RootStackRouter {
     UpcomingMoviesRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const UpcomingMovies());
+    },
+    PicturesRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(routeData: routeData, child: Pictures());
+    },
+    DocumentsRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(routeData: routeData, child: Documents());
     }
   };
 
@@ -137,7 +143,19 @@ class _$AppRouter extends RootStackRouter {
           RouteConfig(GamesRoute.name,
               path: 'games', parent: DashboardRoute.name),
           RouteConfig(FileManagerRoute.name,
-              path: 'file-manager', parent: DashboardRoute.name),
+              path: 'file-manager',
+              parent: DashboardRoute.name,
+              children: [
+                RouteConfig('#redirect',
+                    path: '',
+                    parent: FileManagerRoute.name,
+                    redirectTo: 'pictures',
+                    fullMatch: true),
+                RouteConfig(PicturesRoute.name,
+                    path: 'pictures', parent: FileManagerRoute.name),
+                RouteConfig(DocumentsRoute.name,
+                    path: 'documents', parent: FileManagerRoute.name)
+              ]),
           RouteConfig(ProfileRoute.name,
               path: 'profile', parent: DashboardRoute.name),
           RouteConfig(ProfileDetailsRoute.name,
@@ -241,9 +259,11 @@ class GamesRouteArgs {
 /// generated route for
 /// [FileManager]
 class FileManagerRoute extends PageRouteInfo<FileManagerRouteArgs> {
-  FileManagerRoute({Key? key})
+  FileManagerRoute({Key? key, List<PageRouteInfo>? children})
       : super(FileManagerRoute.name,
-            path: 'file-manager', args: FileManagerRouteArgs(key: key));
+            path: 'file-manager',
+            args: FileManagerRouteArgs(key: key),
+            initialChildren: children);
 
   static const String name = 'FileManagerRoute';
 }
@@ -354,4 +374,20 @@ class UpcomingMoviesRoute extends PageRouteInfo<void> {
       : super(UpcomingMoviesRoute.name, path: 'upcoming-movies');
 
   static const String name = 'UpcomingMoviesRoute';
+}
+
+/// generated route for
+/// [Pictures]
+class PicturesRoute extends PageRouteInfo<void> {
+  const PicturesRoute() : super(PicturesRoute.name, path: 'pictures');
+
+  static const String name = 'PicturesRoute';
+}
+
+/// generated route for
+/// [Documents]
+class DocumentsRoute extends PageRouteInfo<void> {
+  const DocumentsRoute() : super(DocumentsRoute.name, path: 'documents');
+
+  static const String name = 'DocumentsRoute';
 }

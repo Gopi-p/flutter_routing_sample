@@ -1,42 +1,35 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_routing_sample/dashboard/dashboard_controller.dart';
-import 'package:flutter_routing_sample/games/games_controller.dart';
-import 'package:flutter_routing_sample/my_app.module/app_router/app_router.dart';
 import 'package:flutter_routing_sample/shared.module/constants/assets_names.dart';
 import 'package:flutter_routing_sample/shared.module/constants/theme.dart';
 import 'package:flutter_routing_sample/shared.module/widgets/primary_button.dart';
 import 'package:get/get.dart';
 
-class Games extends StatelessWidget {
-  Games({Key? key}) : super(key: key);
+class Documents extends StatelessWidget {
+  Documents({Key? key}) : super(key: key);
   final DashboardController _dashboardController = Get.find();
-  final GamesController _gamesController = Get.find();
   @override
   Widget build(BuildContext context) {
-    print("GAMES BUILD { parent }");
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Center(
           child: Text(
-            'No Games Try GetX',
+            'Documents',
             style: headingText1,
           ),
         ),
         const SizedBox(height: 20),
-        Wrap(
-          children: [
-            PrimaryButton(
-              title: "Snackbar",
-              iconPath: movieIcon,
-              onTap: () {
-                _gamesController.showSnackBar();
-              },
-            )
-          ],
-        )
+        PrimaryButton(
+          title: "Check upcoming movies",
+          iconPath: movieIcon,
+          onTap: () {
+            context.router.pushNamed('movies/upcoming-movies');
+            _dashboardController.activeSideMenuIndex.value = 2;
+          },
+        ),
       ],
     );
   }

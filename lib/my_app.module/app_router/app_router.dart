@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_routing_sample/authentication/auth_guard.dart';
 import 'package:flutter_routing_sample/authentication/login.dart';
 import 'package:flutter_routing_sample/dashboard/dashboard.dart';
+import 'package:flutter_routing_sample/file_manager/documents/documents.dart';
 import 'package:flutter_routing_sample/file_manager/file_manager.dart';
+import 'package:flutter_routing_sample/file_manager/pictures/pictures.dart';
 import 'package:flutter_routing_sample/games/games.dart';
 import 'package:flutter_routing_sample/home/home.dart';
 import 'package:flutter_routing_sample/movies/movies.dart';
@@ -48,7 +50,14 @@ part 'app_router.gr.dart';
           ],
         ),
         AutoRoute(path: 'games', page: Games),
-        AutoRoute(path: 'file-manager', page: FileManager),
+        AutoRoute(
+          path: 'file-manager',
+          page: FileManager,
+          children: [
+            AutoRoute(path: 'pictures', page: Pictures, initial: true),
+            AutoRoute(path: 'documents', page: Documents),
+          ],
+        ),
         AutoRoute(path: 'profile', page: Profile),
         AutoRoute(path: 'user-details/:userId', page: ProfileDetails),
         AutoRoute(path: 'rock-songs', page: RockSongs),
