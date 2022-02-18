@@ -39,9 +39,19 @@ TextStyle get headingText2 => const TextStyle(
 TextStyle get buttonText => const TextStyle(
       fontSize: 15,
       fontWeight: FontWeight.w500,
+      color: tertiaryDarkColor,
     );
 
 //////////////////////Utls////////////////////////////////
 
 const String primaryFontFamily = "Poppins";
 BorderRadius buttonBorderRadius = BorderRadius.circular(7);
+
+class Themes {
+  static final ThemeData lightTheme = ThemeData(
+    colorScheme: const ColorScheme.light(),
+  );
+  static final ThemeData darkTheme = ThemeData(
+    colorScheme: const ColorScheme.dark(),
+  );
+}
